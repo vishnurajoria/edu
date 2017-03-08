@@ -31,8 +31,6 @@ class CoursesController extends Controller
             'description' => 'required|min:6',
         ]);
 
-//        Task::create(request(['title', 'body']));
-//        dd(auth()->id());
         Course::create([
             'title' => request('title'),
             'description' => request('description'),
@@ -40,6 +38,13 @@ class CoursesController extends Controller
         ]);
 
 
+        return redirect('/courses');
+    }
+
+    public function delete(Course $course){
+//        Delete also relations with users - TBD (Need to add interface to enroll users to courses first)
+
+        Course::destroy($course->id);
         return redirect('/courses');
     }
 }

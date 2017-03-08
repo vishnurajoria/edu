@@ -30,14 +30,21 @@ class TasksController extends Controller
             'body' => 'required|min:6',
         ]);
 
-//        Task::create(request(['title', 'body']));
-//        dd(auth()->id());
         Task::create([
             'title' => request('title'),
             'body' => request('body'),
             'user_id' => auth()->id()
         ]);
 
+        return redirect('/tasks');
+    }
+
+    public function delete(Task $task){
+
+//        Delete also the comments of the deleted task
+        $task->comments()->delete();
+
+        Task::destroy($task->id);
         return redirect('/tasks');
     }
 }

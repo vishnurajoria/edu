@@ -5,14 +5,19 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading"><h1>{{$task->title}}</h1></div>
-
                     <div class="panel-body">
                         <p>Author: {{$task->user->name}}</p>
                         <p>Date: {{ $task->created_at->toFormattedDateString() }}</p>
                         <p>Description: {{$task->body}}</p>
                     </div>
                 </div>
-                <a class="btn btn-primary" href="/tasks">Back to tasks</a>
+
+                <form method="POST" action="/tasks/{{$task->id}}">
+                    {{csrf_field()}}
+                    {{ method_field('DELETE') }}
+                    <a class="btn btn-primary" href="/tasks">Back to tasks</a>
+                    <input type="submit" value="Delete task" class="btn btn-danger">
+                </form>
                 <ul>
                     @foreach($task->comments as $comment)
                         <li>{{$comment->body}}</li>

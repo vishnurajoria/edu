@@ -9,7 +9,7 @@ class Course extends Model
     protected $fillable = ['title', 'description', 'author_id']; // 'author_id' should not be here
 
 //  Relationships
-    public function users(){
+    public function enrolledUsers(){
         return $this->belongsToMany(User::class);
     }
     public function author(){

@@ -13,7 +13,12 @@
                         <p>Description: {{$course->description}}</p>
                     </div>
                 </div>
-                <a class="btn btn-primary" href="/courses">Back to courses</a>
+                <form method="POST" action="/courses/{{$course->id}}">
+                    {{csrf_field()}}
+                    {{ method_field('DELETE') }}
+                    <a class="btn btn-primary" href="/courses">Back to courses</a>
+                    <input type="submit" value="Delete course" class="btn btn-danger">
+                </form>
                 <ul>
                     {{--@foreach($course->comments as $comment)--}}
                         {{--<li>{{$comment->body}}</li>--}}
