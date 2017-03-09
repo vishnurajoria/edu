@@ -1,7 +1,19 @@
 # Laravel 5.4 playground #
 
-0. git clone https://manu22@bitbucket.org/manu22/laravel54.git
-1. composer install on vagrant VM
-2. make .env file if missing
-3. migrate db
-4. seed db
+1. 
+```
+#!bash
+
+git clone https://manu22@bitbucket.org/manu22/laravel54.git
+```
+
+2. 
+```
+#!bash
+
+composer install
+```
+ on vagrant VM
+3. make .env file if missing
+4. migrate db
+5. seed db
