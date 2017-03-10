@@ -27,6 +27,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 //  Relationships
+
+//  - Courses
     public function enrolledCourses(){
         return $this->belongsToMany(Course::class);
     }
@@ -35,7 +37,15 @@ class User extends Authenticatable
         return $this->hasMany(Course::class, 'author_id');
     }
 
+//  - Roles
+    public function roles(){
+        return $this->belongsToMany(Role::class);
+    }
+
+
 //  Methods
+
+//  - Courses
     public function addCourse(Course $course){
         $this->courses()->attach($course);
     }
@@ -43,4 +53,8 @@ class User extends Authenticatable
     public function removeCourse(Course $course){
         $this->courses()->detach($course);
     }
+
+//  - Roles
+//    addRole
+
 }
