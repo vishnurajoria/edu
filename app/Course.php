@@ -18,10 +18,10 @@ class Course extends Model
 
 //  Methods
     public function addUser(User $user){
-        $this->users()->attach($user);
+        $this->author()->attach($user);
     }
 
     public function removeUser(User $user){
-        $this->users()->detach($user);
+        $this->author()->detach($user);
     }
 }

@@ -60,7 +60,10 @@ class User extends Authenticatable
                 ->whereCourseId($course->id)
                 ->count() > 0;
         if(!$exists) {
-            $this->enrolledCourses()->attach($course);
+            return $this->enrolledCourses()->attach($course);
+        }
+        else{
+            return false;
         }
 
 //        $this->enrolledCourses()->sync([$course->id], false);

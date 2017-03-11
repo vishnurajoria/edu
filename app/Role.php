@@ -15,7 +15,17 @@ class Role extends Model
 //  Methods
 
     public function addPermission(Permission $permission){
-        return $this->permissions()->save($permission);
+
+        $exists = \DB::table('permission_role')
+                ->whereRoleId($this->id)
+                ->wherePermissionId($permission->id)
+                ->count() > 0;
+        if(!$exists) {
+            return $this->permissions()->attach($permission);
+        }
+        else{
+            return false;
+        }
     }
 
 
