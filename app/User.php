@@ -54,6 +54,19 @@ class User extends Authenticatable
         $this->courses()->detach($course);
     }
 
+    public function enrollToCourse(Course $course){
+        $exists = \DB::table('course_user')
+                ->whereUserId($this->id)
+                ->whereCourseId($course->id)
+                ->count() > 0;
+        if(!$exists) {
+            $this->enrolledCourses()->attach($course);
+        }
+
+//        $this->enrolledCourses()->sync([$course->id], false);
+    }
+
+
 //  - Roles
 //    addRole
 
