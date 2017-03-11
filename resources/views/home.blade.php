@@ -8,7 +8,14 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    <div class="links">
+                        <a href="/tasks">Tasks</a>
+                        <a href="/courses">Courses</a>
+                        @if(Auth::user()->hasRole('admin'))
+                            <a href="/roles"><b>Manage Roles</b></a>
+                            <a href="#"><b>Manage Groups</b></a>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

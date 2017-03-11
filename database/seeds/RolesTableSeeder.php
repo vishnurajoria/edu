@@ -9,7 +9,7 @@ class RolesTableSeeder extends Seeder
      *
      * @return void
      */
-    public static $roles = [
+    protected static $roles = [
         'admin' => 'Adminu la tot',
         'editor' => 'Editor',
         'teacher' => 'Teacher',
@@ -24,13 +24,14 @@ class RolesTableSeeder extends Seeder
             $new_role->label = $role;
 
             $new_role->save();
-//          Add all permissions to admin
+//          Add all permissions to admin role
             if($new_role->name === 'admin'){
-                $permissions_array = PermissionsTableSeeder::$permissions_array;
+                $permissions_array = PermissionsTableSeeder::get_permissions();
                 foreach($permissions_array as $key=>$permission){
                     $new_role->addPermission(App\Permission::where('name', $key)->first());
                 }
-
+//              Set the admin user
+                App\User::find(1)->addRole($new_role);
             }
         }
     }

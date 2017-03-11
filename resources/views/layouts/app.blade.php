@@ -21,6 +21,11 @@
     </script>
 </head>
 <body>
+    @if($flash = session('message'))
+        <div id="flash-message" class="alert alert-success" role="alert">
+            {{$flash}}
+        </div>
+    @endif
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -43,7 +48,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        <li><a href="/home">Home</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

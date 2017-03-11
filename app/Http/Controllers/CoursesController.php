@@ -37,7 +37,7 @@ class CoursesController extends Controller
             'author_id' => auth()->id()
         ]);
 
-
+        session()->flash('message', 'Course created!');
         return redirect('/courses');
     }
 
@@ -45,6 +45,7 @@ class CoursesController extends Controller
 //        Delete also relations with users - TBD (Need to add interface to enroll users to courses first)
 
         Course::destroy($course->id);
+        session()->flash('message', 'Course deleted!');
         return redirect('/courses');
     }
 }

@@ -65,12 +65,37 @@ class User extends Authenticatable
         else{
             return false;
         }
-
 //        $this->enrolledCourses()->sync([$course->id], false);
     }
 
 
 //  - Roles
 //    addRole
+    public function addRole(Role $role){
+        $exists = \DB::table('role_user')
+                ->whereUserId($this->id)
+                ->whereRoleId($role->id)
+                ->count() > 0;
+        if(!$exists) {
+            return $this->roles()->attach($role);
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function getRoles(){
+        return $this->roles()->get();
+    }
+
+    public function hasRole($role_to_search = 'admin'){
+        $roles = $this->roles()->get();
+        foreach( $roles->all() as $role){
+            if($role->name === $role_to_search){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

@@ -30,6 +30,13 @@ Route::post('/courses', 'CoursesController@store');
 Route::delete('/courses/{course}', 'CoursesController@delete');
 Route::post('/courses/{course}/comment', 'CommentsController@store');
 
+//   ->Roles
+Route::get('/roles', 'RolesController@index');
+Route::get('/roles/create', 'RolesController@create');
+Route::get('/roles/{role}', 'RolesController@show');
+Route::post('/roles', 'RolesController@store');
+Route::delete('/roles/{role}', 'RolesController@delete');
+
 
 Auth::routes();
 

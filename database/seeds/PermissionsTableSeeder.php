@@ -10,7 +10,7 @@ class PermissionsTableSeeder extends Seeder
      * @return void
      */
 
-    public static $permissions_array = [
+    protected static $permissions_array = [
         'add-task' => 'Add tasks',
         'edit-task' => 'Edit tasks',
         'delete-task' => 'Delete tasks',
@@ -18,6 +18,10 @@ class PermissionsTableSeeder extends Seeder
         'edit-course' => 'Edit courses',
         'delete-course' => 'Delete courses',
     ];
+
+    public static function get_permissions(){
+        return static::$permissions_array;
+    }
 
     public function run()
     {

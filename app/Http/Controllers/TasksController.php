@@ -35,7 +35,7 @@ class TasksController extends Controller
             'body' => request('body'),
             'user_id' => auth()->id()
         ]);
-
+        session()->flash('message', 'Task created!');
         return redirect('/tasks');
     }
 
@@ -45,6 +45,8 @@ class TasksController extends Controller
         $task->comments()->delete();
 
         Task::destroy($task->id);
+
+        session()->flash('message', 'Task deleted!');
         return redirect('/tasks');
     }
 }

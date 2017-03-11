@@ -24,16 +24,16 @@
                         {{--<li>{{$comment->body}}</li>--}}
                     {{--@endforeach--}}
                 </ul>
-                @if(auth()->check())
-                    Add comment: <br>
-                    <form method="POST" action="/courses/{{$course->id}}/comment">
-                        {{csrf_field()}}
-                        <textarea name="body" id="body" cols="30" rows="10" class="form-control" required></textarea>
-                        <input type="submit" value="Add comment" class="btn btn-primary form-control">
-                    </form>
-                @else
-                    <a href="/login">Login</a> to post a comment
-                @endif
+                {{--@if(auth()->check())--}}
+                    {{--Add comment: <br>--}}
+                    {{--<form method="POST" action="/courses/{{$course->id}}/comment">--}}
+                        {{--{{csrf_field()}}--}}
+                        {{--<textarea name="body" id="body" cols="30" rows="10" class="form-control" required></textarea>--}}
+                        {{--<input type="submit" value="Add comment" class="btn btn-primary form-control">--}}
+                    {{--</form>--}}
+                {{--@else--}}
+                    {{--<a href="/login">Login</a> to post a comment--}}
+                {{--@endif--}}
                 @include('layouts.errors')
             </div>
         </div>

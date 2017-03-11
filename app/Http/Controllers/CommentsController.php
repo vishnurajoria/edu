@@ -15,7 +15,7 @@ class CommentsController extends Controller
         ]);
 
         $task->addComment(request('body'));
-
+        session()->flash('message', 'Comment added!');
         return back();
     }
 }

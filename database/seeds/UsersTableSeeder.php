@@ -13,11 +13,15 @@ class UsersTableSeeder extends Seeder
     {
 //      Seed the admin - To be removed later!
         $faker = Faker\Factory::create();
-        DB::table('users')->insert([
-            'name' => $faker->name,
-            'email' => 'admin'.'@admin.com',
-            'password' => bcrypt('121212'),
-        ]);
+
+        $admin_user = new App\User;
+
+        $admin_user->name = $faker->name;
+        $admin_user->email = 'admin'.'@admin.com';
+        $admin_user->password = bcrypt('121212');
+        $admin_user->remember_token = str_random(10);
+
+        $admin_user->save();
 
 //      Seed 10 users, each one of them being author to a course
         factory(App\User::class, 10)->create()->each(function ($u) {
