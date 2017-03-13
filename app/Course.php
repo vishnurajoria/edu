@@ -15,6 +15,9 @@ class Course extends Model
     public function author(){
         return $this->belongsTo(User::class);
     }
+    public function groups(){
+        return $this->belongsToMany(Group::class);
+    }
 
 //  Methods
     public function addUser(User $user){

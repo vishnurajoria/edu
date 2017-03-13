@@ -13,7 +13,7 @@
                         <a href="/courses">Courses</a>
                         @if(Auth::user()->hasRole('admin'))
                             <a href="/roles"><b>Manage Roles</b></a>
-                            <a href="#"><b>Manage Groups</b></a>
+                            <a href="/groups"><b>Manage Groups</b></a>
                         @endif
                     </div>
                 </div>

@@ -29,17 +29,22 @@ class User extends Authenticatable
 //  Relationships
 
 //  - Courses
-    public function enrolledCourses(){
-        return $this->belongsToMany(Course::class);
-    }
-
     public function courses(){
         return $this->hasMany(Course::class, 'author_id');
+    }
+
+    public function enrolledCourses(){
+        return $this->belongsToMany(Course::class);
     }
 
 //  - Roles
     public function roles(){
         return $this->belongsToMany(Role::class);
+    }
+
+//  - Groups
+    public function groups(){
+        return $this->belongsToMany(Group::class);
     }
 
 

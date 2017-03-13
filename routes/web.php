@@ -34,8 +34,19 @@ Route::post('/courses/{course}/comment', 'CommentsController@store');
 Route::get('/roles', 'RolesController@index');
 Route::get('/roles/create', 'RolesController@create');
 Route::get('/roles/{role}', 'RolesController@show');
+Route::get('/roles/{role}/edit', 'RolesController@edit');
+Route::put('/roles/{role}', 'RolesController@update');
 Route::post('/roles', 'RolesController@store');
-Route::delete('/roles/{role}', 'RolesController@delete');
+Route::delete('/roles/{role}', 'RolesController@destroy');
+
+//   ->Groups
+Route::get('/groups', 'GroupsController@index');
+Route::get('/groups/create', 'GroupsController@create');
+Route::get('/groups/{group}', 'GroupsController@show');
+Route::get('/groups/{group}/edit', 'GroupsController@edit');
+Route::put('/groups/{group}', 'GroupsController@update');
+Route::post('/groups', 'GroupsController@store');
+Route::delete('/groups/{group}', 'GroupsController@destroy');
 
 
 Auth::routes();

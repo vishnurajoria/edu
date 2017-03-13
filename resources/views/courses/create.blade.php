@@ -9,10 +9,10 @@
                     <div class="panel-body">
                         <form class="form-tasks" action="/courses" method="POST">
                             {{csrf_field()}}
-                            <label for="taskTitle" class="sr-only">Course title</label>
+                            <label for="taskTitle" >Course title</label>
                             <input type="text" id="taskTitle" class="form-control" placeholder="title" name="title" required autofocus>
                             <br>
-                            <label for="taskBody" class="sr-only">Course description</label>
+                            <label for="taskBody" >Course description</label>
                             <textarea name="description" id="taskBody" class="form-control" cols="30" rows="5" placeholder="Description"></textarea>
                             <br>
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Create course</button>
