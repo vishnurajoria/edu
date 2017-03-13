@@ -48,6 +48,15 @@ Route::put('/groups/{group}', 'GroupsController@update');
 Route::post('/groups', 'GroupsController@store');
 Route::delete('/groups/{group}', 'GroupsController@destroy');
 
+//   ->Users
+Route::get('/users', 'UsersController@index');
+Route::get('/users/create', 'UsersController@create');
+Route::get('/users/{user}', 'UsersController@show');
+Route::get('/users/{user}/edit', 'UsersController@edit');
+Route::put('/users/{user}', 'UsersController@update');
+Route::post('/users', 'UsersController@store');
+Route::delete('/users/{user}', 'UsersController@destroy');
+
 
 Auth::routes();
 

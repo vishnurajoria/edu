@@ -34,5 +34,20 @@ class RolesTableSeeder extends Seeder
                 App\User::find(1)->addRole($new_role);
             }
         }
+
+        $students = App\User::orderBy('id', 'asc')->where('id', '!=', 1)->take(5)->get();
+        $teachers = App\User::orderBy('id', 'asc')->where('id', '!=', 1)->skip(5)->take(3)->get();
+        $editors = App\User::orderBy('id', 'asc')->where('id', '!=', 1)->skip(8)->take(2)->get();
+
+        $students->each(function ($item, $key) {
+            return $item->addRole(App\Role::find(4));
+        });
+        $teachers->each(function ($item, $key) {
+            return $item->addRole(App\Role::find(3));
+        });
+        $editors->each(function ($item, $key) {
+            return $item->addRole(App\Role::find(2));
+        });
+
     }
 }
