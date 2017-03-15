@@ -109,13 +109,15 @@ class GroupsController extends Controller
      * @param  \App\Groups  $groups
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Groups $groups)
+    public function update(Request $request, $id)
     {
-        $role = Group::find($id);
-        $role->name = $request->name;
-        $role->label = $request->label;
-        $role->save();
-        $role->syncPermissions($request->permissions, true);
+        $group = Group::find($id);
+        $group->name = $request->name;
+        $group->description = $request->description;
+        $group->save();
+//        dd($request->group_users);
+        $group->syncUsers($request->group_users);
+        $group->syncCourses($request->group_courses);
         session()->flash('message', 'Group updated!');
         return redirect('/groups/'.$id);
     }
@@ -126,11 +128,12 @@ class GroupsController extends Controller
      * @param  \App\Groups  $groups
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Groups $groups)
+    public function destroy(Group $group)
     {
 //        Delete also relations with users
-        $role->permissions()->detach();
-        Group::destroy($role->id);
+        $group->users()->detach();
+        $group->courses()->detach();
+        Group::destroy($group->id);
         session()->flash('message', 'Group deleted!');
         return redirect('/groups');
     }

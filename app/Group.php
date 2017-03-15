@@ -47,4 +47,15 @@ class Group extends Model
             return false;
         }
     }
+
+    public function syncUsers($users_array=[]){
+        $users = is_array($users_array) ? $users_array : [];
+        $this->users()->sync($users);
+    }
+
+    public function syncCourses($courses_array=[]){
+        $courses = is_array($courses_array) ? $courses_array : [];
+        $this->courses()->sync($courses);
+    }
+
 }

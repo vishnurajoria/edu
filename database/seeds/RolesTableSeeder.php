@@ -39,12 +39,24 @@ class RolesTableSeeder extends Seeder
         $teachers = App\User::orderBy('id', 'asc')->where('id', '!=', 1)->skip(5)->take(3)->get();
         $editors = App\User::orderBy('id', 'asc')->where('id', '!=', 1)->skip(8)->take(2)->get();
 
-        $students->each(function ($item, $key) {
-            return $item->addRole(App\Role::find(4));
-        });
         $teachers->each(function ($item, $key) {
-            return $item->addRole(App\Role::find(3));
+            $course = factory(App\Course::class)->make();
+
+            $item->addRole(App\Role::find(3));
+//          Publish a course for teachers.
+            $item->courses()->save($course);
+//          Also enroll them to their courses;
+            $item->enrollToCourse($course);
         });
+
+        $students->each(function ($item, $key) {
+            $course_id = $key ? $key < 4 : 0;
+            $course = App\Course::find($course_id+1);
+            $item->addRole(App\Role::find(4));
+//            dd($course);
+            $item->enrollToCourse($course);
+        });
+
         $editors->each(function ($item, $key) {
             return $item->addRole(App\Role::find(2));
         });

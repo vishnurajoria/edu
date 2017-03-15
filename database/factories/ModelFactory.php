@@ -30,3 +30,19 @@ $factory->define(App\Course::class, function (Faker\Generator $faker) {
         'description' => $faker->sentence(13),
     ];
 });
+
+$factory->define(App\Task::class, function (Faker\Generator $faker) {
+
+    return [
+        'title' => $faker->sentence(2),
+        'body' => $faker->sentence(18),
+    ];
+});
+
+$factory->define(App\Group::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->company,
+        'description' => $faker->sentence(12),
+    ];
+});
