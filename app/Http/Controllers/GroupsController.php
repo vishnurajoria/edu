@@ -98,8 +98,8 @@ class GroupsController extends Controller
         $group_teachers = $group->getUsersByRole('teacher');
         $group_students = $group->getUsersByRole('student');
         $group_courses = $group->courses;
-        $all_teachers = User::get()->getByRole('teacher');
-        $all_students = '';
+        $all_teachers = User::getByRole('teacher');
+        $all_students = User::getByRole('student');
         $all_courses = Course::all();
         return view('groups.edit', compact('group','group_teachers','group_students', 'group_courses', 'all_teachers', 'all_students', 'all_courses'));
     }

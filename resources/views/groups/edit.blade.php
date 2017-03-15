@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-9 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading"><h1>Update group: {{$group->name}}</h1></div>
 
@@ -24,10 +24,9 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">Teachers</div>
                                                 <div class="panel-body">
-                                                    {{dd($all_teachers)}}
-                                                    @foreach($all_users as $user)
+                                                    @foreach($all_teachers as $user)
                                                         <input type="checkbox" name="group_users[]" id="user_{{$user->id}}" value="{{$user->id}}"
-                                                           @if($group_users->where('id', $user->id)->first() && $group_users->where('id', $user->id)->first()->id === $user->id)
+                                                           @if($group_teachers->where('id', $user->id)->first() && $group_teachers->where('id', $user->id)->first()->id === $user->id)
                                                            checked
                                                            @endif
                                                         >
@@ -40,7 +39,14 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">Students</div>
                                                 <div class="panel-body">
-
+                                                    @foreach($all_students as $user)
+                                                        <input type="checkbox" name="group_users[]" id="user_{{$user->id}}" value="{{$user->id}}"
+                                                               @if($group_students->where('id', $user->id)->first() && $group_students->where('id', $user->id)->first()->id === $user->id)
+                                                               checked
+                                                                @endif
+                                                        >
+                                                        <label for="user_{{$user->id}}">{{$user->name}}</label><br>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
