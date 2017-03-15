@@ -98,6 +98,20 @@ class User extends Authenticatable
         return $this->roles()->get();
     }
 
+    public function getByRole($role_slug = 'admin'){
+
+        return $this->roles()->where('name', $role_slug)->get();
+
+//        $users_with_roles = $this->users()->with('roles')->get();
+//
+//        $filtered = $users_with_roles->filter(function ($value, $key) use ($role_slug) {
+//            return $value->roles()->where('name', $role_slug)->first();
+//        });
+
+//        return $filtered;
+
+    }
+
     public function hasRole($role_to_search = 'admin'){
         $roles = $this->roles()->get();
         foreach( $roles->all() as $role){

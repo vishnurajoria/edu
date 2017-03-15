@@ -17,14 +17,14 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Teachers</div>
                                     <div class="panel-body">
-                                        @if(!$group_users->isEmpty())
+                                        @if(!$group_teachers->isEmpty())
                                             <ul>
-                                                @foreach($group_users as $group_user)
+                                                @foreach($group_teachers as $group_user)
                                                     <li>{{$group_user->name}}</li>
                                                 @endforeach
                                             </ul>
                                         @else
-                                            <h3>No users</h3>
+                                            <h3>No teachers</h3>
                                         @endif
                                     </div>
                                 </div>
@@ -33,7 +33,15 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Students</div>
                                     <div class="panel-body">
-
+                                        @if(!$group_students->isEmpty())
+                                            <ul>
+                                                @foreach($group_students as $group_user)
+                                                    <li>{{$group_user->name}}</li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            <h3>No students</h3>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

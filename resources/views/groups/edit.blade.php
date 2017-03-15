@@ -24,6 +24,7 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">Teachers</div>
                                                 <div class="panel-body">
+                                                    {{dd($all_teachers)}}
                                                     @foreach($all_users as $user)
                                                         <input type="checkbox" name="group_users[]" id="user_{{$user->id}}" value="{{$user->id}}"
                                                            @if($group_users->where('id', $user->id)->first() && $group_users->where('id', $user->id)->first()->id === $user->id)

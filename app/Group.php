@@ -58,4 +58,16 @@ class Group extends Model
         $this->courses()->sync($courses);
     }
 
+    public function getUsersByRole($role_slug = 'admin'){
+
+        $users_with_roles = $this->users()->with('roles')->get();
+
+        $filtered = $users_with_roles->filter(function ($value, $key) use ($role_slug) {
+            return $value->roles()->where('name', $role_slug)->first();
+        });
+
+        return $filtered;
+
+    }
+
 }

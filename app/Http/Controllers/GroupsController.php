@@ -81,10 +81,10 @@ class GroupsController extends Controller
      */
     public function show(Group $group)
     {
-//        TBD - Make getStudents and getTeachers
-        $group_users = $group->users;
+        $group_teachers = $group->getUsersByRole('teacher');
+        $group_students = $group->getUsersByRole('student');
         $group_courses = $group->courses;
-        return view('groups.show', compact('group','group_users', 'group_courses'));
+        return view('groups.show', compact('group','group_teachers', 'group_students', 'group_courses'));
     }
 
     /**
@@ -95,11 +95,13 @@ class GroupsController extends Controller
      */
     public function edit(Group $group)
     {
-        $group_users = $group->users;
+        $group_teachers = $group->getUsersByRole('teacher');
+        $group_students = $group->getUsersByRole('student');
         $group_courses = $group->courses;
-        $all_users = User::all();
+        $all_teachers = User::get()->getByRole('teacher');
+        $all_students = '';
         $all_courses = Course::all();
-        return view('groups.edit', compact('group','group_users', 'group_courses', 'all_users', 'all_courses'));
+        return view('groups.edit', compact('group','group_teachers','group_students', 'group_courses', 'all_teachers', 'all_students', 'all_courses'));
     }
 
     /**
