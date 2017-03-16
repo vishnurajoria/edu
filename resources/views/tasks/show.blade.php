@@ -12,12 +12,15 @@
                     </div>
                 </div>
 
-                <form method="POST" action="/tasks/{{$task->id}}">
-                    {{csrf_field()}}
-                    {{ method_field('DELETE') }}
-                    <a class="btn btn-primary" href="/tasks">Back to tasks</a>
-                    <input type="submit" value="Delete task" class="btn btn-danger">
-                </form>
+                <a class="btn btn-primary" href="/tasks">Back to tasks</a>
+                @if(Auth::user()->hasRole('admin') || Auth::user()->hasTask($task))
+                    <form style="display: inline;" method="POST" action="/tasks/{{$task->id}}">
+                        {{csrf_field()}}
+                        {{ method_field('DELETE') }}
+
+                        <input type="submit" value="Delete task" class="btn btn-danger">
+                    </form>
+                @endif
                 <ul>
                     @foreach($task->comments as $comment)
                         <li>{{$comment->body}}</li>

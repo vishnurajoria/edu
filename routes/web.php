@@ -26,8 +26,10 @@ Route::post('/tasks/{task}/comment', 'CommentsController@store');
 Route::get('/courses', 'CoursesController@index');
 Route::get('/courses/create', 'CoursesController@create');
 Route::get('/courses/{course}', 'CoursesController@show');
+Route::get('/courses/{course}/edit', 'CoursesController@edit');
+Route::put('/courses/{course}', 'CoursesController@update');
 Route::post('/courses', 'CoursesController@store');
-Route::delete('/courses/{course}', 'CoursesController@delete');
+Route::delete('/courses/{course}', 'CoursesController@destroy');
 Route::post('/courses/{course}/comment', 'CommentsController@store');
 
 //   ->Roles

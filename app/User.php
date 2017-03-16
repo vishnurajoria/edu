@@ -55,6 +55,11 @@ class User extends Authenticatable
 
 //  Methods
 
+// - Tasks
+    public function hasTask(Task $task){
+        return $task->user()->first()->id == $this->id;
+    }
+
 //  - Courses
     public function addCourse(Course $course){
         $this->courses()->attach($course);
@@ -75,7 +80,9 @@ class User extends Authenticatable
         else{
             return false;
         }
-//        $this->enrolledCourses()->sync([$course->id], false);
+    }
+    public function isEnrolledToCourse(Course $course){
+        return $this->enrolledCourses()->where('courses.id', $course->id)->count();
     }
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
 use App\User;
 use Illuminate\Http\Request;
 use App\Course;
@@ -41,7 +42,22 @@ class CoursesController extends Controller
         return redirect('/courses');
     }
 
-    public function delete(Course $course){
+    public function edit(Course $course){
+
+        return view('courses.edit', compact('course'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $group = Course::find($id);
+        $group->title = $request->title;
+        $group->description = $request->description;
+        $group->save();
+        session()->flash('message', 'Course updated!');
+        return redirect('/courses/'.$id);
+    }
+
+    public function destroy(Course $course){
 //        Delete also relations with users - TBD (Need to add interface to enroll users to courses first)
 
         Course::destroy($course->id);

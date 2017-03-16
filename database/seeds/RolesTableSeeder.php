@@ -33,11 +33,17 @@ class RolesTableSeeder extends Seeder
 //              Set the admin user
                 App\User::find(1)->addRole($new_role);
             }
+            if($new_role->name === 'student'){
+                App\User::find(2)->addRole($new_role);
+            }
+            if($new_role->name === 'teacher'){
+                App\User::find(3)->addRole($new_role);
+            }
         }
 
-        $students = App\User::orderBy('id', 'asc')->where('id', '!=', 1)->take(5)->get();
-        $teachers = App\User::orderBy('id', 'asc')->where('id', '!=', 1)->skip(5)->take(3)->get();
-        $editors = App\User::orderBy('id', 'asc')->where('id', '!=', 1)->skip(8)->take(2)->get();
+        $students = App\User::orderBy('id', 'asc')->skip(3)->take(5)->get();
+        $teachers = App\User::orderBy('id', 'asc')->skip(8)->take(3)->get();
+        $editors = App\User::orderBy('id', 'asc')->skip(11)->take(2)->get();
 
         $teachers->each(function ($item, $key) {
             $course = factory(App\Course::class)->make();
