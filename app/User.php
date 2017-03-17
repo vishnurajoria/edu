@@ -81,8 +81,27 @@ class User extends Authenticatable
             return false;
         }
     }
+
     public function isEnrolledToCourse(Course $course){
         return $this->enrolledCourses()->where('courses.id', $course->id)->count();
+    }
+
+    public function isMemberOfGroupEnrolledToCourse(Course $course){
+
+//        dd($course);
+        $user_groups = $this->groups()->with('courses')->get();
+
+//        dd($user_groups);
+
+        $filtered_groups = $user_groups->filter(function ($value, $key) use ($course){
+
+            return $value->courses()->where('course_id', $course->id)->first();
+        });
+
+//        return $filtered_groups->count();
+
+        dd($filtered_groups);
+
     }
 
 

@@ -55,7 +55,7 @@
                                 @if(!$group_courses->isEmpty())
                                     <ul>
                                         @foreach($group_courses as $group_course)
-                                            <li>{{$group_course->title}}</li>
+                                            <li><a href="/courses/{{$group_course->id}}">{{$group_course->title}}</a></li>
                                         @endforeach
                                     </ul>
                                 @else
@@ -65,14 +65,15 @@
                         </div>
                     </div>
                 </div>
-                <form method="POST" action="/groups/{{$group->id}}">
-                    {{csrf_field()}}
-                    {{ method_field('DELETE') }}
-                    <a class="btn btn-primary" href="/groups">Back to groups</a>
+                <a class="btn btn-primary" href="/groups">Back to groups</a>
+                @if(Auth::user()->hasRole('admin'))
                     <a class="btn btn-success" href="/groups/{{$group->id}}/edit">Edit group</a>
-                    <input type="submit" value="Delete group" class="btn btn-danger">
-                </form>
-
+                    <form style="display: inline;" method="POST" action="/groups/{{$group->id}}">
+                        {{csrf_field()}}
+                        {{ method_field('DELETE') }}
+                        <input type="submit" value="Delete group" class="btn btn-danger">
+                    </form>
+                @endif
                 @include('layouts.errors')
             </div>
         </div>

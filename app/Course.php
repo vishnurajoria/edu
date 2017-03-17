@@ -39,4 +39,6 @@ class Course extends Model
         return $filtered;
 
     }
+
+
 }
