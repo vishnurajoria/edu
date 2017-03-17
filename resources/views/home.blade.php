@@ -16,6 +16,9 @@
                             <a href="/groups"><b>Manage Groups</b></a>
                             <a href="/users"><b>Manage Users</b></a>
                         @endif
+                        @if(Auth::user()->hasRole('student') || Auth::user()->hasRole('teacher'))
+                            <a href="/your-groups"><b>Groups</b></a>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -13,7 +13,8 @@ class TasksController extends Controller
 
     public function index(){
         $tasks = Task::all();
-        return view('tasks.index', compact('tasks'));
+        $user_tasks = \Auth::user()->tasks()->get();
+        return view('tasks.index', compact('tasks', 'user_tasks'));
     }
 
     public function show(Task $task){

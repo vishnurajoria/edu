@@ -27,4 +27,16 @@ class Course extends Model
     public function removeUser(User $user){
         $this->author()->detach($user);
     }
+
+    public function getUsersByRole($role_slug = 'admin'){
+
+        $users_with_roles = $this->enrolledUsers()->with('roles')->get();
+
+        $filtered = $users_with_roles->filter(function ($value, $key) use ($role_slug) {
+            return $value->roles()->where('name', $role_slug)->first();
+        });
+
+        return $filtered;
+
+    }
 }

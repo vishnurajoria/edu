@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-9 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h1>Groups</h1></div>
+                    <div class="panel-heading"><h1>Your Groups</h1></div>
 
                     <div class="panel-body">
                         @foreach($groups as $group)
@@ -12,7 +12,6 @@
                         @endforeach
                     </div>
                 </div>
-                <a class="btn btn-primary" href="/groups/create">Create new group</a>
             </div>
         </div>
     </div>

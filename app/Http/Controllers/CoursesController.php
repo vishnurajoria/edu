@@ -19,7 +19,10 @@ class CoursesController extends Controller
     }
 
     public function show(Course $course){
-        return view('courses.show', compact('course'));
+        $enrolled_teachers = $course->getUsersByRole('teacher');
+        $enrolled_students = $course->getUsersByRole('student');
+
+        return view('courses.show', compact('course', 'enrolled_teachers', 'enrolled_students'));
     }
 
     public function create(){

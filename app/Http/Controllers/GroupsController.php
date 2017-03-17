@@ -6,11 +6,15 @@ use Illuminate\Http\Request;
 use App\Group;
 use App\User;
 use App\Course;
+use Illuminate\Support\Facades\Auth;
 
 class GroupsController extends Controller
 {
     public function __construct(){
-        $this->middleware('admin');
+        $this->middleware('admin')->except(['indexIn', 'show']);
+
+//      Let users that are members of the group access the show() method
+        $this->middleware('group-access')->only(['show']);
     }
     /**
      * Display a listing of the resource.
@@ -21,6 +25,12 @@ class GroupsController extends Controller
     {
         $groups = Group::all();
         return view('groups.index', compact('groups'));
+    }
+
+    public function indexIn()
+    {
+        $groups = Auth::user()->groups()->get();
+        return view('groups.index_in', compact('groups'));
     }
 
     /**
@@ -81,10 +91,17 @@ class GroupsController extends Controller
      */
     public function show(Group $group)
     {
-        $group_teachers = $group->getUsersByRole('teacher');
-        $group_students = $group->getUsersByRole('student');
-        $group_courses = $group->courses;
-        return view('groups.show', compact('group','group_teachers', 'group_students', 'group_courses'));
+//      Check if there is a relation between the logged user and the displayed group
+        if(!\Auth::user()->groups()->where('group_id', $group->id)->get()->isEmpty() || \Auth::user()->hasRole('admin')){
+            $group_teachers = $group->getUsersByRole('teacher');
+            $group_students = $group->getUsersByRole('student');
+            $group_courses = $group->courses;
+            return view('groups.show', compact('group','group_teachers', 'group_students', 'group_courses'));
+        }
+        else{
+            return redirect('/your-groups');
+        }
+
     }
 
     /**

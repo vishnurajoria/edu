@@ -50,6 +50,8 @@ Route::put('/groups/{group}', 'GroupsController@update');
 Route::post('/groups', 'GroupsController@store');
 Route::delete('/groups/{group}', 'GroupsController@destroy');
 
+Route::get('/your-groups', 'GroupsController@indexIn');
+
 //   ->Users
 Route::get('/users', 'UsersController@index');
 Route::get('/users/create', 'UsersController@create');
