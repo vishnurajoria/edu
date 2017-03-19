@@ -5,3 +5,8 @@
 3. make .env file if missing
 4. migrate db
 5. seed db
+
+## Up on DO server http://138.68.169.72 ##
+admin@admin.com - 121212
+student@student.com - 121212
+teacher@teacher.com - 121212
