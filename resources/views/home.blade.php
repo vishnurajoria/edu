@@ -17,7 +17,9 @@
                             <a href="/users"><b>Manage Users</b></a>
                         @endif
                         @if(Auth::user()->hasRole('student') || Auth::user()->hasRole('teacher'))
-                            <a href="/your-groups"><b>Groups</b></a>
+                            <a href="/your-groups">Groups</a>
+                        @elseif(Auth::user()->roles->isEmpty())
+                            <a href="/get-role"><b>Become a student/teacher</b></a>
                         @endif
                     </div>
                 </div>

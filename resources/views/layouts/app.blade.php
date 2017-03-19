@@ -59,8 +59,9 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
+                                {{--{{ dd(Auth::user()->roles->isEmpty()) }}--}}
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} ({{ Auth::user()->roles->first()->name }}) <span class="caret"></span>
+                                    {{ Auth::user()->name }} ({{ !Auth::user()->roles->isEmpty() ? Auth::user()->roles->first()->name : 'no role' }}) <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">

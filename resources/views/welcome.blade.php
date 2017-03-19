@@ -63,6 +63,7 @@
             @if (Auth::check())
                 <a href="{{ url('/home') }}">Home</a>
             @else
+                <a href="/courses">Courses</a>
                 <a href="{{ url('/login') }}">Login</a>
                 <a href="{{ url('/register') }}">Register</a>
             @endif
@@ -73,11 +74,8 @@
         <div class="title m-b-md">
             Laravel
         </div>
-
+        <p>playground</p>
         <div class="links">
-            <a href="/tasks">Tasks</a>
-            <a href="/courses">Courses</a>
-
             {{--<a href="https://laravel.com/docs">Documentation</a>--}}
             {{--<a href="https://laracasts.com">Laracasts</a>--}}
             {{--<a href="https://laravel-news.com">News</a>--}}

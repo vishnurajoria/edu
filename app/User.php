@@ -98,9 +98,9 @@ class User extends Authenticatable
             return $value->courses()->where('course_id', $course->id)->first();
         });
 
-//        return $filtered_groups->count();
+        return $filtered_groups->count();
 
-        dd($filtered_groups);
+//        dd($filtered_groups);
 
     }
 
