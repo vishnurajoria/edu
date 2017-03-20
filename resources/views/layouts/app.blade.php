@@ -79,6 +79,7 @@
                                 </ul>
                             </li>
                         @endif
+                        <li><a href="/info">Info</a></li>
                     </ul>
                 </div>
             </div>

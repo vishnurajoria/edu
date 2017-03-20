@@ -88,14 +88,6 @@ class User extends Authenticatable
         $this->enrolledCourses()->sync($courses);
     }
 
-    public function syncRoles($roles_array = []){
-        $roles = is_array($roles_array) ? $roles_array : [];
-        $this->roles()->sync($roles);
-    }
-    public function syncGroups($groups_array = []){
-        $groups = is_array($groups_array) ? $groups_array : [];
-        $this->groups()->sync($groups);
-    }
 
     public function isEnrolledToCourse(Course $course){
         return $this->enrolledCourses()->where('courses.id', $course->id)->count();
@@ -171,6 +163,11 @@ class User extends Authenticatable
         return false;
     }
 
+    public function syncRoles($roles_array = []){
+        $roles = is_array($roles_array) ? $roles_array : [];
+        $this->roles()->sync($roles);
+    }
+
 //  - Groups
     public function addGroup(Group $group){
         $exists = \DB::table('group_user')
@@ -183,6 +180,11 @@ class User extends Authenticatable
         else{
             return false;
         }
+    }
+
+    public function syncGroups($groups_array = []){
+        $groups = is_array($groups_array) ? $groups_array : [];
+        $this->groups()->sync($groups);
     }
 
 }

@@ -65,3 +65,7 @@ Route::delete('/users/{user}', 'UsersController@destroy');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/info', function () {
+    $enabled = true;
+    return view('info', compact('enabled'));
+});

@@ -67,6 +67,7 @@
                 <a href="{{ url('/login') }}">Login</a>
                 <a href="{{ url('/register') }}">Register</a>
             @endif
+            <a href="/info">Info</a>
         </div>
     @endif
 
