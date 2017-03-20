@@ -14,8 +14,8 @@
                                 <p>Description: {{$course->description}}</p>
                             </div>
                         </div>
-                        {{--{{ dd(Auth::user()->isMemberOfGroupEnrolledToCourse($course)) }}--}}
-                        @if(Auth::user()->isEnrolledToCourse($course) || Auth::user()->isMemberOfGroupEnrolledToCourse($course))
+                        {{--{{ dd(Auth::user()->isAuthor($course)) }}--}}
+                        @if(Auth::user()->isEnrolledToCourse($course) || Auth::user()->isMemberOfGroupEnrolledToCourse($course) || Auth::user()->isAuthor($course))
                             <div class="panel panel-default">
                                 <div class="panel-heading">Course specific content</div>
                                 <div class="panel-body">

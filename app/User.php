@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -121,14 +122,19 @@ class User extends Authenticatable
 
         foreach ($filtered_groups as $filtered_group){
             foreach($filtered_group as $course){
-                $hold_courses[] = $course;
+                if(!in_array($course->id, $hold_courses)) {
+                    $hold_courses[] = $course->id;
+                }
             }
         }
 
-//        dd( $user_groups, $filtered_groups, collect($hold_courses) );
+//        dd( $user_groups, $filtered_groups, Course::find($hold_courses));
 
-        return collect($hold_courses)->unique();
+        return Course::find($hold_courses);
+    }
 
+    public function isAuthor(Course $course){
+        return $course->author()->first()->id == $this->id;
     }
 
 
