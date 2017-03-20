@@ -109,15 +109,25 @@ class User extends Authenticatable
         $hold_courses = [];
         $filtered_groups = $user_groups->transform(function ($group, $key){
 
-            foreach($group->courses()->get() as $course){
-                return $course;
-            }
+//            foreach($group->courses()->get() as $course){
+//                return $course;
+//            }
 
+            return $group->courses()->get()->transform(function( $course, $key){
+                    return $course;
+                }
+            );
         });
 
-//        dd( $user_groups, $filtered_groups );
+        foreach ($filtered_groups as $filtered_group){
+            foreach($filtered_group as $course){
+                $hold_courses[] = $course;
+            }
+        }
 
-        return $filtered_groups->unique();
+//        dd( $user_groups, $filtered_groups, collect($hold_courses) );
+
+        return collect($hold_courses)->unique();
 
     }
 
