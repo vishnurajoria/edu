@@ -6,6 +6,7 @@ use App\Group;
 use App\User;
 use Illuminate\Http\Request;
 use App\Course;
+Use Auth;
 
 class CoursesController extends Controller
 {
@@ -15,7 +16,9 @@ class CoursesController extends Controller
 
     public function index(){
         $courses = Course::all();
-        return view('courses.index', compact('courses'));
+        $user_courses = Auth::check() ? Auth::user()->enrolledCourses()->get() : [];
+        $user_courses_by_group = Auth::check() ? Auth::user()->getLoggedUserCoursesEnrolledByGroup() : [];
+        return view('courses.index', compact('courses', 'user_courses', 'user_courses_by_group'));
     }
 
     public function show(Course $course){

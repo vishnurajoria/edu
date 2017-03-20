@@ -104,6 +104,23 @@ class User extends Authenticatable
 
     }
 
+    public function getLoggedUserCoursesEnrolledByGroup(){
+        $user_groups = $this->groups()->with('courses')->get();
+        $hold_courses = [];
+        $filtered_groups = $user_groups->transform(function ($group, $key){
+
+            foreach($group->courses()->get() as $course){
+                return $course;
+            }
+
+        });
+
+//        dd( $user_groups, $filtered_groups );
+
+        return $filtered_groups->unique();
+
+    }
+
 
 //  - Roles
 //    addRole
