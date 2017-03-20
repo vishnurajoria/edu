@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-9 col-md-offset-1">
+            <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading"><h1>Create group</h1></div>
 
@@ -23,9 +23,9 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">Teachers</div>
                                                 <div class="panel-body">
-                                                    @foreach($all_users as $user)
-                                                    <input type="checkbox" name="group_users[]" id="{{$user->id}}" value="{{$user->id}}">
-                                                    <label for="{{$user->id}}">{{$user->name}}</label><br>
+                                                    @foreach($all_teachers as $user)
+                                                    <input type="checkbox" name="group_users[]" id="user_{{$user->id}}" value="{{$user->id}}">
+                                                    <label for="user_{{$user->id}}">{{$user->name}}</label><br>
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -34,7 +34,10 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">Students</div>
                                                 <div class="panel-body">
-
+                                                    @foreach($all_students as $user)
+                                                        <input type="checkbox" name="group_users[]" id="user_{{$user->id}}" value="{{$user->id}}">
+                                                        <label for="user_{{$user->id}}">{{$user->name}}</label><br>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>
@@ -46,8 +49,8 @@
                                         <div class="panel-heading">Courses</div>
                                         <div class="panel-body">
                                             @foreach($all_courses as $course)
-                                                <input type="checkbox" name="group_courses[]" id="{{$course->id}}" value="{{$course->id}}">
-                                                <label for="{{$course->id}}">{{$course->title}}</label><br>
+                                                <input type="checkbox" name="group_courses[]" id="course_{{$course->id}}" value="{{$course->id}}">
+                                                <label for="course_{{$course->id}}">{{$course->title}}</label><br>
                                             @endforeach
                                         </div>
                                     </div>

@@ -40,9 +40,11 @@ class GroupsController extends Controller
      */
     public function create()
     {
-        $all_users = User::all();
+        $all_teachers = User::getByRole('teacher');
+        $all_students = User::getByRole('student');
         $all_courses = Course::all();
-        return view('groups.create', compact('all_users','all_courses'));
+
+        return view('groups.create', compact('all_teachers', 'all_students', 'all_courses'));
     }
 
     /**

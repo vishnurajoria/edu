@@ -83,37 +83,36 @@ class User extends Authenticatable
         }
     }
 
+    public function syncEnrolledCourses($courses_array = []){
+        $courses = is_array($courses_array) ? $courses_array : [];
+        $this->enrolledCourses()->sync($courses);
+    }
+
+    public function syncRoles($roles_array = []){
+        $roles = is_array($roles_array) ? $roles_array : [];
+        $this->roles()->sync($roles);
+    }
+    public function syncGroups($groups_array = []){
+        $groups = is_array($groups_array) ? $groups_array : [];
+        $this->groups()->sync($groups);
+    }
+
     public function isEnrolledToCourse(Course $course){
         return $this->enrolledCourses()->where('courses.id', $course->id)->count();
     }
 
     public function isMemberOfGroupEnrolledToCourse(Course $course){
-
-//        dd($course);
         $user_groups = $this->groups()->with('courses')->get();
-
-//        dd($user_groups);
-
         $filtered_groups = $user_groups->filter(function ($value, $key) use ($course){
-
             return $value->courses()->where('course_id', $course->id)->first();
         });
-
         return $filtered_groups->count();
-
-//        dd($filtered_groups);
-
     }
 
     public function getLoggedUserCoursesEnrolledByGroup(){
         $user_groups = $this->groups()->with('courses')->get();
         $hold_courses = [];
         $filtered_groups = $user_groups->transform(function ($group, $key){
-
-//            foreach($group->courses()->get() as $course){
-//                return $course;
-//            }
-
             return $group->courses()->get()->transform(function( $course, $key){
                     return $course;
                 }
@@ -128,8 +127,6 @@ class User extends Authenticatable
             }
         }
 
-//        dd( $user_groups, $filtered_groups, Course::find($hold_courses));
-
         return Course::find($hold_courses);
     }
 
@@ -139,7 +136,6 @@ class User extends Authenticatable
 
 
 //  - Roles
-//    addRole
     public function addRole(Role $role){
         $exists = \DB::table('role_user')
                 ->whereUserId($this->id)
@@ -173,6 +169,20 @@ class User extends Authenticatable
             }
         }
         return false;
+    }
+
+//  - Groups
+    public function addGroup(Group $group){
+        $exists = \DB::table('group_user')
+                ->whereUserId($this->id)
+                ->whereGroupId($group->id)
+                ->count() > 0;
+        if(!$exists) {
+            return $this->groups()->attach($group);
+        }
+        else{
+            return false;
+        }
     }
 
 }
