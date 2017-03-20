@@ -34,6 +34,8 @@
                             @endif
                         @endforeach
                     </ul>
+                @else
+                    <h3>Not enabled</h3>
                 @endif
             </div>
         </div>

@@ -66,6 +66,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/info', function () {
-    $enabled = true;
+    $enabled = false;
     return view('info', compact('enabled'));
 });
