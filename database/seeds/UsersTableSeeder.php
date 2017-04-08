@@ -48,7 +48,7 @@ class UsersTableSeeder extends Seeder
         $teacher_user->save();
 
 //      Seed 10 users, each one of them having a task submitted
-        factory(App\User::class, 10)->create()->each(function ($u) {
+        factory(App\User::class, 1000)->create()->each(function ($u) {
 
             $task = factory(App\Task::class)->make();
             $u->tasks()->save($task);

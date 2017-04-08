@@ -11,7 +11,7 @@ class GroupsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Group::class, 5)->create()->each(function ($g, $i) {
+        factory(App\Group::class, 200)->create()->each(function ($g, $i) {
 //          Seed some users
             $students = App\User::whereHas('roles', function ($query) {
                 $query->where('name', '=', 'student');

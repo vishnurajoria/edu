@@ -11,7 +11,7 @@
                     <h3>Teachers</h3>
                     <ul>
                         <li><b>teacher@teacher.com</b> - 121212</li>
-                        @foreach(App\User::getByRole('teacher') as $user)
+                        @foreach(App\User::getByRole('teacher', 5) as $user)
                             @if(Hash::check('secret',$user->password))
                                 <li>{{ $user->email }} - secret</li>
                             @endif
@@ -20,7 +20,7 @@
                     <h3>Students</h3>
                     <ul>
                         <li><b>student@student.com</b> - 121212</li>
-                        @foreach(App\User::getByRole('student') as $user)
+                        @foreach(App\User::getByRole('student', 5) as $user)
                             @if(Hash::check('secret',$user->password))
                                 <li>{{ $user->email }} - secret</li>
                             @endif

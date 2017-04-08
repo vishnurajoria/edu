@@ -145,11 +145,19 @@ class User extends Authenticatable
         return $this->roles()->get();
     }
 
-    public static function getByRole($role_slug = 'admin'){
+    public static function getByRole($role_slug = 'admin', $take = null){
 
-        return User::whereHas('roles', function ($query) use ($role_slug) {
-            $query->where('name', $role_slug);
-        })->get();
+        if(!empty($take)){
+            return User::whereHas('roles', function ($query) use ($role_slug) {
+                $query->where('name', $role_slug);
+            })->take(intval($take))->get();
+        }
+        else{
+            return User::whereHas('roles', function ($query) use ($role_slug) {
+                $query->where('name', $role_slug);
+            })->get();
+        }
+
 
     }
 
