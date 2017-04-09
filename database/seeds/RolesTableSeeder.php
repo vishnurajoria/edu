@@ -41,9 +41,9 @@ class RolesTableSeeder extends Seeder
             }
         }
 
-        $students = App\User::orderBy('id', 'asc')->skip(3)->take(750)->get();
-        $teachers = App\User::orderBy('id', 'asc')->skip(753)->take(90)->get();
-        $editors = App\User::orderBy('id', 'asc')->skip(843)->take(30)->get();
+        $students = App\User::orderBy('id', 'asc')->skip(3)->take(3500)->get();
+        $teachers = App\User::orderBy('id', 'asc')->skip(3503)->take(400)->get();
+        $editors = App\User::orderBy('id', 'asc')->skip(3903)->take(50)->get();
 
         $teachers->each(function ($item, $key) {
             $course = factory(App\Course::class)->make();
@@ -56,11 +56,13 @@ class RolesTableSeeder extends Seeder
         });
 
         $students->each(function ($item, $key) {
-            $course_id = $key < 80 ? $key : 0;
-            $course = App\Course::find($course_id+1);
+            $course_id = $key < 290 ? $key : 0;
+            $course1 = App\Course::find($course_id+1);
+            $course2 = App\Course::find($course_id+100);
             $item->addRole(App\Role::find(4));
 //            dd($course);
-            $item->enrollToCourse($course);
+            $item->enrollToCourse($course1);
+            $item->enrollToCourse($course2);
         });
 
         $editors->each(function ($item, $key) {

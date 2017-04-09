@@ -28,7 +28,7 @@
                     </ul>
                     <h3>Editors</h3>
                     <ul>
-                        @foreach(App\User::getByRole('editor') as $user)
+                        @foreach(App\User::getByRole('editor', 5) as $user)
                             @if(Hash::check('secret',$user->password))
                                 <li>{{ $user->email }} - secret</li>
                             @endif

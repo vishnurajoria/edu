@@ -23,7 +23,7 @@ class GroupsController extends Controller
      */
     public function index()
     {
-        $groups = Group::all();
+        $groups = Group::orderBy('created_at', 'desc')->simplePaginate(20);
         return view('groups.index', compact('groups'));
     }
 

@@ -2,14 +2,30 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-9 col-md-offset-1">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h1>All Courses</h1></div>
+                    <div class="panel-heading"><h1>All Courses
+                            @if(isset(request()->input()['page']))
+                                - page {{ request()->input()['page'] }}
+                            @endif
+                    </h1></div>
                     <div class="panel-body">
                         @foreach($courses as $course)
-                            <li><a href="/courses/{{$course->id}}">{{$course->title}}</a></li>
+                            <div class="col-sm-6">
+                                <a href="/courses/{{$course->id}}">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">{{$course->title}}</div>
+                                        <div class="panel-body">
+                                            <p>Date: {{ $course->created_at->toFormattedDateString() }}</p>
+                                            <p>Author: {{$course->author->name}}</p>
+                                            <p>Description: {{ str_limit($course->description, 60)}}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         @endforeach
                     </div>
+                    <div class="text-center">{{ $courses->links() }}</div>
                 </div>
                 @if(Auth::check())
                     <div class="row">
@@ -18,9 +34,11 @@
                                 <div class="panel-heading">Enrolled in</div>
                                 <div class="panel-body">
                                     @if(count($user_courses))
+                                        <ul>
                                         @foreach($user_courses as $course)
                                             <li><a href="/courses/{{$course->id}}">{{$course->title}}</a></li>
                                         @endforeach
+                                        </ul>
                                     @else
                                         <h3>No courses</h3>
                                     @endif
@@ -32,9 +50,11 @@
                                 <div class="panel-heading">Enrolled in by group</div>
                                 <div class="panel-body">
                                     @if(count($user_courses_by_group))
+                                        <ul>
                                         @foreach($user_courses_by_group as $course)
                                             <li><a href="/courses/{{$course->id}}">{{$course->title}}</a></li>
                                         @endforeach
+                                        </ul>
                                     @else
                                         <h3>No courses</h3>
                                     @endif

@@ -12,7 +12,7 @@ class TasksController extends Controller
     }
 
     public function index(){
-        $tasks = Task::all();
+        $tasks = Task::orderBy('created_at', 'desc')->simplePaginate(50);
         $user_tasks = \Auth::user()->tasks()->get();
         return view('tasks.index', compact('tasks', 'user_tasks'));
     }
