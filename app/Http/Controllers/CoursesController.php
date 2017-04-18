@@ -21,6 +21,12 @@ class CoursesController extends Controller
         return view('courses.index', compact('courses', 'user_courses', 'user_courses_by_group'));
     }
 
+    public function indexApi(){
+        $courses = Course::orderBy('created_at', 'desc')->simplePaginate(20);
+//        return compact('courses');
+        dd($courses);
+    }
+
     public function show(Course $course){
         $enrolled_teachers = $course->getUsersByRole('teacher');
         $enrolled_students = $course->getUsersByRole('student');

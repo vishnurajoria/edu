@@ -61,6 +61,9 @@ Route::put('/users/{user}', 'UsersController@update');
 Route::post('/users', 'UsersController@store');
 Route::delete('/users/{user}', 'UsersController@destroy');
 
+//  ->API
+Route::get('/api/courses', 'CoursesController@indexApi');
+
 
 Auth::routes();
 
