@@ -58,7 +58,7 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li class="dropdown">
+                            <li id="logout_dd" class="dropdown" onclick="toggleClass('logout_dd', 'open')">
                                 {{--{{ dd(Auth::user()->roles->isEmpty()) }}--}}
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} ({{ !Auth::user()->roles->isEmpty() ? Auth::user()->roles->first()->name : 'no role' }}) <span class="caret"></span>
@@ -88,6 +88,8 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    {{--<script src="{{ asset('js/app.js') }}"></script>--}}
+    @yield('footer')
+
 </body>
 </html>

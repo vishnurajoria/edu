@@ -18,6 +18,7 @@ Vue.component('example', require('./components/Example.vue'));
 const app = new Vue({
     el: '#app'
 });
+
 jQuery(document).ready(function() {
     jQuery('#flash-message').delay(500).fadeIn(250).delay(3000).fadeOut(500);
 });

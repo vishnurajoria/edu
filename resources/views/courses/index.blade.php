@@ -42,33 +42,37 @@
                         <a class="btn btn-primary" href="/courses/create" style="margin-bottom: 30px;">Create new course</a>
                     @endif
                 @endif
-                <div class="panel panel-default">
-                    <div class="panel-heading"><h1>All Courses
-                            @if(isset(request()->input()['page']))
-                                - page {{ request()->input()['page'] }}
-                            @endif
-                    </h1></div>
-                    <div class="panel-body">
-                        @foreach($courses as $course)
-                            <div class="col-sm-6">
-                                <a href="/courses/{{$course->id}}">
-                                    <div class="panel panel-primary">
-                                        <div class="panel-heading">{{$course->title}}</div>
-                                        <div class="panel-body">
-                                            <p>Date: {{ $course->created_at->toFormattedDateString() }}</p>
-                                            <p>Author: {{$course->author->name}}</p>
-                                            <p>Description: {{ str_limit($course->description, 60)}}</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        @endforeach
-                    </div>
-                    <div class="text-center">{{ $courses->links() }}</div>
+                {{--<div class="panel panel-default">--}}
+                    {{--<div class="panel-heading"><h1>All Courses--}}
+                            {{--@if(isset(request()->input()['page']))--}}
+                                {{--- page {{ request()->input()['page'] }}--}}
+                            {{--@endif--}}
+                    {{--</h1></div>--}}
+                    {{--<div class="panel-body">--}}
+                        {{--@foreach($courses as $course)--}}
+                            {{--<div class="col-sm-6">--}}
+                                    {{--<div class="panel panel-info">--}}
+                                        {{--<div class="panel-heading"><a href="/courses/{{$course->id}}">{{$course->title}}</a></div>--}}
+                                        {{--<div class="panel-body">--}}
+                                            {{--<p>Date: {{ $course->created_at->toFormattedDateString() }}</p>--}}
+                                            {{--<p>Author: {{$course->author->name}}</p>--}}
+                                            {{--<p>Description: {{ str_limit($course->description, 60)}}</p>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                            {{--</div>--}}
+                        {{--@endforeach--}}
+                    {{--</div>--}}
+                    {{--<div class="text-center">{{ $courses->links() }}</div>--}}
+                {{--</div>--}}
+                <div id="app-container">
+                    <course-list></course-list>
                 </div>
-
             </div>
         </div>
     </div>
-
+@endsection
+@section('footer')
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
 @endsection

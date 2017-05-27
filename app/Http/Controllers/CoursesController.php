@@ -11,20 +11,20 @@ Use Auth;
 class CoursesController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth')->except(['index']);
+        $this->middleware('auth')->except(['index', 'indexApi']);
     }
 
     public function index(){
-        $courses = Course::orderBy('created_at', 'desc')->simplePaginate(20);
+        $courses = Course::orderBy('created_at', 'desc')->simplePaginate(10);
         $user_courses = Auth::check() ? Auth::user()->enrolledCourses()->get() : [];
         $user_courses_by_group = Auth::check() ? Auth::user()->getLoggedUserCoursesEnrolledByGroup() : [];
         return view('courses.index', compact('courses', 'user_courses', 'user_courses_by_group'));
     }
 
     public function indexApi(){
-        $courses = Course::orderBy('created_at', 'desc')->simplePaginate(20);
-//        return compact('courses');
-        dd($courses);
+        $courses = Course::orderBy('created_at', 'desc')->simplePaginate(10);
+        return compact('courses');
+//        dd($courses);
     }
 
     public function show(Course $course){
