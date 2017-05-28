@@ -1,12 +1,12 @@
-# Laravel 5.4 playground #
 
-1. git clone https://manu22@bitbucket.org/manu22/laravel54.git
-2. composer install on vagrant VM
-3. make .env file if missing
+# Learning platform with user roles, groups and courses #
+# Setup #
+
+1. clone repo
+2. composer install
+3. setup .env file
 4. migrate db
 5. seed db
 
-## Up on DO server http://138.68.169.72 ##
-admin@admin.com - 121212
-student@student.com - 121212
-teacher@teacher.com - 121212
+## Demo on http://edu.devdo.me ##
+Check http://edu.devdo.me/info for credentials
