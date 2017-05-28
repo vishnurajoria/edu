@@ -1,28 +1,11 @@
 Vue.component('course-list', {
-    // template: '<div class="panel panel-default">' +
-    //             '<div class="panel-heading"><h1>All Courses</h1></div>' +
-    //                 '<div class="panel-body">' +
-    //                     '<div class="col-sm-6" v-for="course in courses">'+
-    //                         '<div class="panel panel-info">'+
-    //                             '<div class="panel-heading"><a v-bind:href="courseUrl(course.id)">{{ course.title }}</a></div>'+
-    //                             '<div class="panel-body">'+
-    //                                 '<p>Date: {{ course.created_at }}</p>'+
-    //                                 '<p>Author: {{ course.author_id }}</p>'+
-    //                                 '<p>Description: {{ courseExcerpt(course.description, 75) }}</p>'+
-    //                             '</div>'+
-    //                         '</div>'+
-    //                     '</div>'+
-    //                     '<button @click="loadMoreCourses()" class="btn btn-primary">Load more</button>'+
-    //                 '</div>'+
-    //             '</div>'+
-    //         '</div>',
     template: '<div class="panel panel-default">' +
                 '<div class="panel-heading"><h1>All Courses</h1></div>' +
                     '<div class="panel-body">' +
 
                         '<course v-for="course in courses" :title="course.title" :href="courseUrl(course.id)" :description="courseExcerpt(course.description, 75)"></course>'+
 
-                        '<button @click="loadMoreCourses()" class="btn btn-primary">Load more</button>'+
+                        '<div class="col-md-12"><button @click="loadMoreCourses()" class="btn btn-primary">Load more</button></div>'+
                     '</div>'+
                 '</div>'+
             '</div>',
@@ -38,7 +21,7 @@ Vue.component('course-list', {
             .then(function (response) {
                 this.courses = response.data.courses.data;
                 this.current_page = response.data.courses.current_page;
-                console.log(response.data);
+                // console.log(response.data);
             }.bind(this))
             .catch(function (error) {
                 console.log(error);
@@ -60,7 +43,7 @@ Vue.component('course-list', {
                 .then(function (response) {
                     this.courses = this.courses.concat(response.data.courses.data);
                     this.current_page = response.data.courses.current_page;
-                    console.log(response.data);
+                    // console.log(response.data);
                 }.bind(this))
                 .catch(function (error) {
                     console.log(error);
